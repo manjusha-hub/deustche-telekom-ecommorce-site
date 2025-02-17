@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple AngularJS Login</title>
+  <link rel="stylesheet" href="./login.component.css">
+  
+  <!-- Load AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="http://angularjs.org"></script>
+
+  <!-- Load the compiled JavaScript files -->
+  <script src="./login.component.ts"></script> <!-- compiled from login.service.ts -->
+  <script src="./login.module.ts"></script>  <!-- compiled from login.module.ts -->
+  <script src="./login.service.ts"></script> <!-- compiled from login.component.ts -->
+
+</head>
+<body ng-app="loginApp" ng-controller="LoginController">
+
+  <div class="login-container">
+    <h2>Login</h2>
+
+    <form name="loginForm" ng-submit="login()" novalidate>
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" ng-model="user.username" required>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" ng-model="user.password" required>
+      </div>
+
+      <div>
+        <button type="submit" ng-disabled="loginForm.$invalid">Login</button>
+      </div>
+
+      <p ng-if="errorMessage" class="error">{{ errorMessage }}</p>
+    </form>
+  </div>
+
+</body>
+</html>

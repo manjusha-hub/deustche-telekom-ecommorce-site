@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Shopping App</title>
+  <link rel="stylesheet" href="./style.css"/>
+
+  <!-- Load AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="./angular.min.js"></script>
+  <script src="./angular-route.min.js"></script>
+
+  <!-- Load the compiled JavaScript files -->
+  <script src="./dist/login/login.component.js"></script> <!-- login module -->
+  <script src="./dist/login/login.module.js"></script> <!-- login controller -->
+  <script src="./dist/login/login.service.js"></script>
+
+  <script src="./dist/product/cart.component.js"></script> <!-- product module -->
+  <script src="./dist/product/cart.module.js"></script> <!-- product controller -->
+  <script src="./dist/product/cart.service.js"></script>
+
+  <script src="./dist/onlineshopping/store.component.js"></script> <!-- online shopping module -->
+  <script src="./dist/onlineshopping/store.module.js"></script> <!-- shopping cart controller -->
+  <script src="./dist/onlineshopping/store.service.js"></script>
+
+  <script src="./app.module.js"></script> <!-- main app module -->
+  <script src="app/app.controller.js"></script> <!-- main app controller -->
+
+</head>
+<body ng-app="app" ng-controller="MainController">
+
+  <!-- Login Section -->
+  <div ng-controller="LoginController">
+    <h2>Login</h2>
+    <form name="loginForm" ng-submit="login()" novalidate>
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" ng-model="user.username" required>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" ng-model="user.password" required>
+      </div>
+
+      <div>
+        <button type="submit" ng-disabled="loginForm.$invalid">Login</button>
+      </div>
+
+      <p ng-if="errorMessage" class="error">{{ errorMessage }}</p>
+    </form>
+  </div>
+
+  <!-- Product Section -->
+  <div ng-controller="ProductController">
+    <h2>Products</h2>
+    <ul>
+      <li ng-repeat="product in products">
+        {{ product.name }} - ${{ product.price }}
+        <button ng-click="addToCart(product)">Add to Cart</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Shopping Cart Section -->
+  <div ng-controller="OnlineShoppingController">
+    <h2>Your Shopping Cart</h2>
+    <ul>
+      <li ng-repeat="item in shoppingCart">
+        {{ item.name }} - ${{ item.price }}
+        <button ng-click="removeFromCart($index)">Remove</button>
+      </li>
+    </ul>
+  </div>
+
+</body>
+</html>

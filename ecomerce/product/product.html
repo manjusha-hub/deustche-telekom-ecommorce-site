@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Registration</title>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./scripts/modules/product.modules.js"></script>
+    <script src="./scripts/controllers/product.controllers.js"></script>
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="./scripts/styles/product.css">
+</head>
+
+<body ng-app="productModule" ng-controller="ProductController">
+    <form ng-submit="registerProduct()" class="form">
+        <h2>Register Product</h2>
+        <input type="text" name="productName" id="productName" ng-model="productName" placeholder="Enter product name" required />
+        <br><br>
+        <input type="text" name="price" id="price" ng-model="price" placeholder="Enter product price" required />
+        <br><br>
+        <input type="text" name="img" id="img" ng-model="img" placeholder="Enter product image URL (optional)" />
+        <br><br>
+        <button type="submit">Add Product</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="product in products">
+            <td>{{product.id}}</td>
+            <td>
+                <img ng-src="{{product.img}}" height="90px" alt="Product Image">
+            </td>
+            <td>{{product.productName}}</td>
+            <td>{{product.price | currency:"₹"}}</td>
+            <td>
+                <form ng-submit="addProductToShopingCard(product.id)">
+                    <button type="submit">Add</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
